@@ -14,7 +14,7 @@ def game_core_v1(number):
             return(count) # выход из цикла, если угадали
         
         
-def score_game(game_core):
+def score_game(game_core, name):
     '''Запускаем игру 1000 раз, чтобы узнать, как быстро игра угадывает число'''
     count_ls = []
     np.random.seed(1)  # фиксируем RANDOM SEED, чтобы ваш эксперимент был воспроизводим!
@@ -22,11 +22,8 @@ def score_game(game_core):
     for number in random_array:
         count_ls.append(game_core(number))
     score = int(np.mean(count_ls))
-    print(f"Ваш алгоритм угадывает число в среднем за {score} попыток")
+    print(f"Алгоритм {name} угадывает число в среднем за {score} попыток при угадывании числа от 1 до {MAX_VAL}")
     return(score)
-
-# запускаем
-# score_game(game_core_v1)
 
 def game_core_v2(number):
     '''Сначала устанавливаем любое random число, а потом уменьшаем или увеличиваем его в зависимости от того, больше оно или меньше нужного.
@@ -40,9 +37,6 @@ def game_core_v2(number):
         elif number < predict: 
             predict -= 1
     return(count) # выход из цикла, если угадали
-
-# Проверяем
-# score_game(game_core_v2)
 
 def game_core_v3(number):
     # try to play with prediction step value
@@ -58,4 +52,11 @@ def game_core_v3(number):
             predict -= step
     return(count) # выход из цикла, если угадали
 
-score_game(game_core_v3)
+
+def test_all():
+	score_game(game_core_v1, 'brute')
+	score_game(game_core_v2, '+/- 1')
+	score_game(game_core_v3, 'regression')
+
+
+test_all()
