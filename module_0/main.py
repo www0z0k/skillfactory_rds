@@ -76,7 +76,7 @@ def test_all():
 	if(MAX_VAL < 100000):
 		score_game(game_core_v2, '+/- 1')
 	else:
-		print(f"{MAX_VAL} > 1000, алгоритм +/- 1 будет угадывать его слишком долго, пропускаем")
+		print(f"{MAX_VAL} > 100000, алгоритм +/- 1 будет угадывать его слишком долго, пропускаем")
 	score_game(game_core_v3, 'regression')
 
 
