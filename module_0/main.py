@@ -6,13 +6,13 @@ MAX_VAL = 100
 def set_max():
 	while True:
 		try:
-			val = int(input('Введите максимальное значение (целое число больше 1) '))
+			val = int(input('\tВведите максимальное значение (целое число больше 1) '))
 		except ValueError:
-			print('Не целое или не число')
+			print('\t\tНе целое или не число')
 			continue
 		else:
 			if(val <= 1):
-				print('Не больше 1')
+				print('\t\tНе больше 1')
 			else:
 				return val 
 				break 
@@ -36,7 +36,7 @@ def score_game(game_core, name):
 	for number in random_array:
 		count_ls.append(game_core(number))
 	score = int(np.mean(count_ls))
-	print(f"Алгоритм {name} угадывает число в среднем за {score} попыток при угадывании числа от 1 до {MAX_VAL}")
+	print(f"Алгоритм {name} угадывает число от 1 до {MAX_VAL} в среднем за {score} попыток")
 	return(score)
 
 def game_core_v2(number):
@@ -82,7 +82,15 @@ def test_all():
 
 test_all()
 
-print('Теперь можно проверить на произвольных значениях')
+def once_more():
+	reply = input('\tТеперь можно проверить на произвольных значениях, хотите? Нажмите Enter чтобы продолжить или введите любой символ и Enter если не надо ')
+	if len(reply) == 0:
+		global MAX_VAL
+		MAX_VAL = set_max()
+		test_all()
+		once_more()
+	else:
+		print('Спасибо, всего доброго')
+		return
 
-MAX_VAL = set_max()
-test_all()
+once_more()
