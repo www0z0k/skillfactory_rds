@@ -15,7 +15,6 @@ def set_max():
 				print('\t\tНе больше 1')
 			else:
 				return val 
-				break 
 
 def game_core_v1(number):
 	'''Просто угадываем на random, никак не используя информацию о больше или меньше.
@@ -25,7 +24,7 @@ def game_core_v1(number):
 		count += 1
 		predict = np.random.randint(1, MAX_VAL + 1) # предполагаемое число
 		if number == predict: 
-			return(count) # выход из цикла, если угадали
+			return count  # выход из цикла, если угадали
 		
 		
 def score_game(game_core, name):
@@ -37,7 +36,7 @@ def score_game(game_core, name):
 		count_ls.append(game_core(number))
 	score = int(np.mean(count_ls))
 	print(f"Алгоритм {name} угадывает число от 1 до {MAX_VAL} в среднем за {score} попыток")
-	return(score)
+	return score
 
 def game_core_v2(number):
 	'''Сначала устанавливаем любое random число, а потом уменьшаем или увеличиваем его в зависимости от того, больше оно или меньше нужного.
@@ -50,7 +49,7 @@ def game_core_v2(number):
 			predict += 1
 		elif number < predict: 
 			predict -= 1
-	return(count) # выход из цикла, если угадали
+	return count # выход из цикла, если угадали
 
 def game_core_v3(number):
 	# try to play with prediction step value
@@ -64,7 +63,7 @@ def game_core_v3(number):
 			predict += step
 		elif number < predict: 
 			predict -= step
-	return(count) # выход из цикла, если угадали
+	return count # выход из цикла, если угадали
 
 
 def test_all():
@@ -80,8 +79,6 @@ def test_all():
 	score_game(game_core_v3, 'regression')
 
 
-test_all()
-
 def once_more():
 	reply = input('\tТеперь можно проверить на произвольных значениях, хотите? Нажмите Enter чтобы продолжить или введите любой символ и Enter если не надо ')
 	if len(reply) == 0:
@@ -92,5 +89,7 @@ def once_more():
 	else:
 		print('Спасибо, всего доброго')
 		return
+
+test_all()
 
 once_more()
