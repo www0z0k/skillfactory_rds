@@ -8,31 +8,48 @@ pd.set_option('display.max_columns', 20)
 
 data = pd.read_csv('data.csv')
 #1
-# display(data[data.budget == data.budget.max()])
+display(data[data.budget == data.budget.max()])
+#answer - 4
+
 #2
-# display(data[data.runtime == data.runtime.max()])
+display(data[data.runtime == data.runtime.max()])
+#answer - 2
+
 #3
-# display(data[data.runtime == data.runtime.min()])
+display(data[data.runtime == data.runtime.min()])
+#answer - 3
+
 #4
 # display(data.runtime.mean())
+#answer - 2
+
 #5
-# display(data.runtime.median())
-data['profit'] = data['revenue'] - data['budget']
+display(data.runtime.median())
+#answer - 1
+
 #6
-# display(data[data['profit'] == data['profit'].max()])
+data['profit'] = data['revenue'] - data['budget']
+display(data[data['profit'] == data['profit'].max()])
+#answer - 5
+
 #7
-# display(data[data['profit'] == data['profit'].min()])
+display(data[data['profit'] == data['profit'].min()])
+#answer - 2
+
 #8
-# display(data[data['profit'] > 0].count())
-# display(len(data[data['profit'] > 0]))
+display(data[data['profit'] > 0].count())
+display(len(data[data['profit'] > 0]))
+#answer - 1
 
 #9
-# d2008 = data[data['release_year'] == 2008]
-# display(d2008[d2008['profit'] == d2008['profit'].max()])
+d2008 = data[data['release_year'] == 2008]
+display(d2008[d2008['profit'] == d2008['profit'].max()])
+#answer - 4
 
 #10
-# sliced = data.query('2011 < release_year < 2015')
-# display(sliced[sliced['profit'] == sliced['profit'].min()])
+sliced = data.query('2011 < release_year < 2015')
+display(sliced[sliced['profit'] == sliced['profit'].min()])
+#answer - 5
 
 #11
 def get_genres(df, g):
@@ -49,83 +66,93 @@ for lst in unique_genre_sets:
 #####
 # TODO - make a kind of sorted array when I got time
 #####
-
-# display(len(get_genres(data, 'Action')))
-# display(len(get_genres(data, 'Adventure')))
-# display(len(get_genres(data, 'Drama')))
-# display(len(get_genres(data, 'Comedy')))
-# display(len(get_genres(data, 'Thriller')))
+display(len(get_genres(data, 'Action')))
+display(len(get_genres(data, 'Adventure')))
+display(len(get_genres(data, 'Drama')))
+display(len(get_genres(data, 'Comedy')))
+display(len(get_genres(data, 'Thriller')))
+#answer - 3
 
 #12
-# display(len(get_genres(data, 'Action').query('profit > 0')))
-# display(len(get_genres(data, 'Adventure').query('profit > 0')))
-# display(len(get_genres(data, 'Drama').query('profit > 0')))
-# display(len(get_genres(data, 'Comedy').query('profit > 0')))
-# display(len(get_genres(data, 'Thriller').query('profit > 0')))
+display(len(get_genres(data, 'Action').query('profit > 0')))
+display(len(get_genres(data, 'Adventure').query('profit > 0')))
+display(len(get_genres(data, 'Drama').query('profit > 0')))
+display(len(get_genres(data, 'Comedy').query('profit > 0')))
+display(len(get_genres(data, 'Thriller').query('profit > 0')))
+#answer - 3
 
 #13 - this one looks better than previous two
-# display(data.query('director in ["Steven Spielberg", "Ridley Scott", "Steven Soderbergh", "Christopher Nolan", "Clint Eastwood"]').director.value_counts())
+display(data.query('director in ["Steven Spielberg", "Ridley Scott", "Steven Soderbergh", "Christopher Nolan", "Clint Eastwood"]').director.value_counts())
+#answer - 3
 
 #14
-# display(data.query('director in ["Steven Spielberg", "Ridley Scott", "Steven Soderbergh", "Christopher Nolan", "Clint Eastwood"] & profit > 0').director.value_counts())
+display(data.query('director in ["Steven Spielberg", "Ridley Scott", "Steven Soderbergh", "Christopher Nolan", "Clint Eastwood"] & profit > 0').director.value_counts())
+#answer - 2
 
 #15
-# pivot = data.loc[data['director'].isin(["Steven Spielberg", "James Cameron", "Christopher Nolan", "David Yates", "Peter Jackson"])].pivot_table(values=['profit'],
-# index=['director'],
-# aggfunc='sum',
-# fill_value=0)
-# display(pivot)
+pivot = data.loc[data['director'].isin(["Steven Spielberg", "James Cameron", "Christopher Nolan", "David Yates", "Peter Jackson"])].pivot_table(values=['profit'],
+index=['director'],
+aggfunc='sum',
+fill_value=0)
+display(pivot)
+#answer - 5
 
 #16
-# display(data.query('cast.str.contains("Emma Watson")').profit.sum())
-# display(data.query('cast.str.contains("Johnny Depp")').profit.sum())
-# display(data.query('cast.str.contains("Michelle Rodriguez")').profit.sum())
-# display(data.query('cast.str.contains("Orlando Bloom")').profit.sum())
-# display(data.query('cast.str.contains("Rupert Grint")').profit.sum())
+display(data.query('cast.str.contains("Emma Watson")').profit.sum())
+display(data.query('cast.str.contains("Johnny Depp")').profit.sum())
+display(data.query('cast.str.contains("Michelle Rodriguez")').profit.sum())
+display(data.query('cast.str.contains("Orlando Bloom")').profit.sum())
+display(data.query('cast.str.contains("Rupert Grint")').profit.sum())
+#answer - 1
 
 #17
 def get_profit_by_actor(df, actor):
 	return df.query('cast.str.contains("' + actor + '")').profit.sum()
 
 d2012 = data[data['release_year'] == 2012]
-# df = pd.DataFrame({'Nicolas Cage': [get_profit_by_actor(d2012, 'Nicolas Cage')], 
-# 'Danny Huston': [get_profit_by_actor(d2012, 'Danny Huston')], 
-# 'Kirsten Dunst': [get_profit_by_actor(d2012, 'Kirsten Dunst')], 
-# 'Jim Sturgess': [get_profit_by_actor(d2012, 'Jim Sturgess')], 
-# 'Sami Gayle': [get_profit_by_actor(d2012, 'Sami Gayle')]})
-# display(df)
+df = pd.DataFrame({'Nicolas Cage': [get_profit_by_actor(d2012, 'Nicolas Cage')], 
+'Danny Huston': [get_profit_by_actor(d2012, 'Danny Huston')], 
+'Kirsten Dunst': [get_profit_by_actor(d2012, 'Kirsten Dunst')], 
+'Jim Sturgess': [get_profit_by_actor(d2012, 'Jim Sturgess')], 
+'Sami Gayle': [get_profit_by_actor(d2012, 'Sami Gayle')]})
+display(df)
+#answer - 3
 
 #18
 avg = data.budget.mean()
 high_budget = data[data.budget > avg]
-# display(len(high_budget.query('cast.str.contains("Tom Cruise")')))
-# display(len(high_budget.query('cast.str.contains("Mark Wahlberg")')))
-# display(len(high_budget.query('cast.str.contains("Matt Damon")')))
-# display(len(high_budget.query('cast.str.contains("Angelina Jolie")')))
-# display(len(high_budget.query('cast.str.contains("Adam Sandler")')))
+display(len(high_budget.query('cast.str.contains("Tom Cruise")')))
+display(len(high_budget.query('cast.str.contains("Mark Wahlberg")')))
+display(len(high_budget.query('cast.str.contains("Matt Damon")')))
+display(len(high_budget.query('cast.str.contains("Angelina Jolie")')))
+display(len(high_budget.query('cast.str.contains("Adam Sandler")')))
+#answer - 3
 
 #19
 cage = data.query('cast.str.contains("Nicolas Cage")')
-# display(len(get_genres(cage, 'Drama')))
-# display(len(get_genres(cage, 'Action')))
-# display(len(get_genres(cage, 'Thriller')))
-# display(len(get_genres(cage, 'Adventure')))
-# display(len(get_genres(cage, 'Crime')))
+display(len(get_genres(cage, 'Drama')))
+display(len(get_genres(cage, 'Action')))
+display(len(get_genres(cage, 'Thriller')))
+display(len(get_genres(cage, 'Adventure')))
+display(len(get_genres(cage, 'Crime')))
+#answer - 2
 
 #20
-# display(len(data.query('production_companies.str.contains("Universal")')))
-# display(len(data.query('production_companies.str.contains("Paramount Pictures")')))
-# display(len(data.query('production_companies.str.contains("Columbia Pictures")')))
-# display(len(data.query('production_companies.str.contains("Warner Bros")')))
-# display(len(data.query('production_companies.str.contains("Twentieth Century Fox Film Corporation")')))
+display(len(data.query('production_companies.str.contains("Universal")')))
+display(len(data.query('production_companies.str.contains("Paramount Pictures")')))
+display(len(data.query('production_companies.str.contains("Columbia Pictures")')))
+display(len(data.query('production_companies.str.contains("Warner Bros")')))
+display(len(data.query('production_companies.str.contains("Twentieth Century Fox Film Corporation")')))
+#answer - 1
 
 #21
 d2015 = data[data['release_year'] == 2015]
-# display(len(d2015.query('production_companies.str.contains("Universal Pictures")')))
-# display(len(d2015.query('production_companies.str.contains("Paramount Pictures")')))
-# display(len(d2015.query('production_companies.str.contains("Columbia Pictures")')))
-# display(len(d2015.query('production_companies.str.contains("Warner Bros")')))
-# display(len(d2015.query('production_companies.str.contains("Twentieth Century Fox Film Corporation")')))
+display(len(d2015.query('production_companies.str.contains("Universal Pictures")')))
+display(len(d2015.query('production_companies.str.contains("Paramount Pictures")')))
+display(len(d2015.query('production_companies.str.contains("Columbia Pictures")')))
+display(len(d2015.query('production_companies.str.contains("Warner Bros")')))
+display(len(d2015.query('production_companies.str.contains("Twentieth Century Fox Film Corporation")')))
+#answer - 4
 
 #22
 def named_field_entries_count(df, field, s):
@@ -136,11 +163,12 @@ def named_field_entries_sum(df, field, s, inner):
 
 
 comedies = get_genres(data, 'Comedy')
-# print(named_field_entries_sum(comedies, 'production_companies', 'Warner Bros', 'profit'))
-# print(named_field_entries_sum(comedies, 'production_companies', 'Universal', 'profit'))
-# print(named_field_entries_sum(comedies, 'production_companies', 'Columbia Pictures', 'profit'))
-# print(named_field_entries_sum(comedies, 'production_companies', 'Paramount Pictures', 'profit'))
-# print(named_field_entries_sum(comedies, 'production_companies', 'Walt Disney', 'profit'))
+print(named_field_entries_sum(comedies, 'production_companies', 'Warner Bros', 'profit'))
+print(named_field_entries_sum(comedies, 'production_companies', 'Universal', 'profit'))
+print(named_field_entries_sum(comedies, 'production_companies', 'Columbia Pictures', 'profit'))
+print(named_field_entries_sum(comedies, 'production_companies', 'Paramount Pictures', 'profit'))
+print(named_field_entries_sum(comedies, 'production_companies', 'Walt Disney', 'profit'))
+#answer - 2
 
 #23
 def field_entries_count(df, field, s):
@@ -149,33 +177,36 @@ def field_entries_count(df, field, s):
 def field_entries_sum(df, field, s, inner):
 	return df.query(field + '.str.contains("' + s + '")')[inner].sum()
 
-
-# df = pd.DataFrame({'Universal': [field_entries_sum(d2012, 'production_companies', 'Universal', 'profit')],
-# 'Warner Bros': [field_entries_sum(d2012, 'production_companies', 'Warner Bros', 'profit')],
-# 'Columbia Pictures': [field_entries_sum(d2012, 'production_companies', 'Columbia Pictures', 'profit')],
-# 'Paramount Pictures': [field_entries_sum(d2012, 'production_companies', 'Paramount Pictures', 'profit')],
-# 'Lucasfilm': [field_entries_sum(d2012, 'production_companies', 'Lucasfilm', 'profit')]
-# })
-# display(df)
+df = pd.DataFrame({'Universal': [field_entries_sum(d2012, 'production_companies', 'Universal', 'profit')],
+'Warner Bros': [field_entries_sum(d2012, 'production_companies', 'Warner Bros', 'profit')],
+'Columbia Pictures': [field_entries_sum(d2012, 'production_companies', 'Columbia Pictures', 'profit')],
+'Paramount Pictures': [field_entries_sum(d2012, 'production_companies', 'Paramount Pictures', 'profit')],
+'Lucasfilm': [field_entries_sum(d2012, 'production_companies', 'Lucasfilm', 'profit')]
+})
+display(df)
+#answer - 3
 
 #24
 paramounts = data.query('production_companies.str.contains("Paramount Pictures")')
-# display(paramounts[paramounts.profit == paramounts.profit.min()])
+display(paramounts[paramounts.profit == paramounts.profit.min()])
+#answer - 1
 
 #25
-# pivot = data.loc[data['release_year'].isin([2002, 2008, 2012, 2014, 2015])].pivot_table(values=['profit'],
-# index=['release_year'],
-# aggfunc='sum',
-# fill_value=0)
-# display(pivot)
+pivot = data.loc[data['release_year'].isin([2002, 2008, 2012, 2014, 2015])].pivot_table(values=['profit'],
+index=['release_year'],
+aggfunc='sum',
+fill_value=0)
+display(pivot)
+#answer - 5
 
 #26
-# warners = data.query('production_companies.str.contains("Warner Bros")')
-# pivot = warners.loc[warners['release_year'].isin([2002, 2008, 2012, 2014, 2015])].pivot_table(values=['profit'],
-# index=['release_year'],
-# aggfunc='sum',
-# fill_value=0)
-# display(pivot)
+warners = data.query('production_companies.str.contains("Warner Bros")')
+pivot = warners.loc[warners['release_year'].isin([2002, 2008, 2012, 2014, 2015])].pivot_table(values=['profit'],
+index=['release_year'],
+aggfunc='sum',
+fill_value=0)
+display(pivot)
+#answer - 1
 
 #27
 def by_month(df, index):
@@ -186,74 +217,80 @@ jun = by_month(data, '6/')
 dec = by_month(data, '12/')
 sep = by_month(data, '9/')
 may = by_month(data, '5/')
-# display(len(jan), len(jun), len(dec), len(sep), len(may))
+display(len(jan), len(jun), len(dec), len(sep), len(may))
+#answer - 4
 
 #28
 jul = by_month(data, '7/')
 aug = by_month(data, '8/')
-# display(len(jun) + len(jul) + len(aug))
-def field_entries_sum(df, field, s, inner):
-	return df.query(field + '.str.contains("' + s + '")')[inner].sum()
-
+display(len(jun) + len(jul) + len(aug))
+#answer - 2
 
 #29
-# display(len(data[(data['director'] == "Steven Soderbergh") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
-# display(len(data[(data['director'] == "Christopher Nolan") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
-# display(len(data[(data['director'] == "Clint Eastwood") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
-# display(len(data[(data['director'] == "Ridley Scott") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
-# display(len(data[(data['director'] == "Peter Jackson") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+display(len(data[(data['director'] == "Steven Soderbergh") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+display(len(data[(data['director'] == "Christopher Nolan") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+display(len(data[(data['director'] == "Clint Eastwood") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+display(len(data[(data['director'] == "Ridley Scott") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+display(len(data[(data['director'] == "Peter Jackson") & ((data.release_date.str.find('1/', 0, len('1/')) == 0) | (data.release_date.str.find('2/', 0, len('2/')) == 0) | (data.release_date.str.find('12/', 0, len('12/')) == 0))]))
+#answer - 5
 
 #30 Think more!!!
-# years = data.release_year.unique()
-# lst = []
-# for y in years:
-# 	lst.append([y, jan.query('release_year == ' + str(y)).profit.sum(), jun.query('release_year == ' + str(y)).profit.sum(), dec.query('release_year == ' + str(y)).profit.sum(), sep.query('release_year == ' + str(y)).profit.sum(), may.query('release_year == ' + str(y)).profit.sum()])
+years = data.release_year.unique()
+lst = []
+for y in years:
+	lst.append([y, jan.query('release_year == ' + str(y)).profit.sum(), jun.query('release_year == ' + str(y)).profit.sum(), dec.query('release_year == ' + str(y)).profit.sum(), sep.query('release_year == ' + str(y)).profit.sum(), may.query('release_year == ' + str(y)).profit.sum()])
 
-# df = pd.DataFrame(np.array(lst), columns = ['y', 'jan', 'jun', 'dec', 'sep', 'may'])
-# df['mv'] = df.max(axis = 1)
+df = pd.DataFrame(np.array(lst), columns = ['y', 'jan', 'jun', 'dec', 'sep', 'may'])
+df['mv'] = df.max(axis = 1)
+#answer - 2
 
 #31
-# display(data.query('production_companies.str.contains("Universal")').original_title.str.len().mean())
-# display(data.query('production_companies.str.contains("Warner Bros")').original_title.str.len().mean())
-# display(data.query('production_companies.str.contains("Jim Henson Company, The")').original_title.str.len().mean())
-# display(data.query('production_companies.str.contains("Paramount Pictures")').original_title.str.len().mean())
-# display(data.query('production_companies.str.contains("Four By Two Productions")').original_title.str.len().mean())
+display(data.query('production_companies.str.contains("Universal")').original_title.str.len().mean())
+display(data.query('production_companies.str.contains("Warner Bros")').original_title.str.len().mean())
+display(data.query('production_companies.str.contains("Jim Henson Company, The")').original_title.str.len().mean())
+display(data.query('production_companies.str.contains("Paramount Pictures")').original_title.str.len().mean())
+display(data.query('production_companies.str.contains("Four By Two Productions")').original_title.str.len().mean())
 
 #32
-# display(data.query('production_companies.str.contains("Universal")').original_title.str.split().map(lambda a: len(a)).mean())
-# display(data.query('production_companies.str.contains("Warner Bros")').original_title.str.split().map(lambda a: len(a)).mean())
-# display(data.query('production_companies.str.contains("Jim Henson Company, The")').original_title.str.split().map(lambda a: len(a)).mean())
-# display(data.query('production_companies.str.contains("Paramount Pictures")').original_title.str.split().map(lambda a: len(a)).mean())
-# display(data.query('production_companies.str.contains("Four By Two Productions")').original_title.str.split().map(lambda a: len(a)).mean())
+display(data.query('production_companies.str.contains("Universal")').original_title.str.split().map(lambda a: len(a)).mean())
+display(data.query('production_companies.str.contains("Warner Bros")').original_title.str.split().map(lambda a: len(a)).mean())
+display(data.query('production_companies.str.contains("Jim Henson Company, The")').original_title.str.split().map(lambda a: len(a)).mean())
+display(data.query('production_companies.str.contains("Paramount Pictures")').original_title.str.split().map(lambda a: len(a)).mean())
+display(data.query('production_companies.str.contains("Four By Two Productions")').original_title.str.split().map(lambda a: len(a)).mean())
+#answer - 5
 
 #33
-# names = data.original_title.values.tolist();
+names = data.original_title.values.tolist();
 
-# words = []
-# for w in names:
-# 	arr = w.split(' ')
-# 	for s in arr:
-# 		if s.lower() not in words:
-# 			words.append(s.lower())
-# print(len(words))
+words = []
+for w in names:
+	arr = w.split(' ')
+	for s in arr:
+		if s.lower() not in words:
+			words.append(s.lower())
+print(len(words))
+#answer - 3
 
 #34
-# topsorted = data.sort_values('vote_average', ascending = False)
-# display(topsorted.head(int(0.01 * len(topsorted))))
+topsorted = data.sort_values('vote_average', ascending = False)
+display(topsorted.head(int(0.01 * len(topsorted))))
+#answer - 1
 
 #35
-# display(len(data.query('cast.str.contains("Johnny Depp") & cast.str.contains("Helena Bonham Carter")')))
-# display(len(data.query('cast.str.contains("Hugh Jackman") & cast.str.contains("Ian McKellen")')))
-# display(len(data.query('cast.str.contains("Vin Diesel") & cast.str.contains("Paul Walker")')))
-# display(len(data.query('cast.str.contains("Adam Sandler") & cast.str.contains("Kevin James")')))
-# display(len(data.query('cast.str.contains("Daniel Radcliffe") & cast.str.contains("Rupert Grint")')))
+display(len(data.query('cast.str.contains("Johnny Depp") & cast.str.contains("Helena Bonham Carter")')))
+display(len(data.query('cast.str.contains("Hugh Jackman") & cast.str.contains("Ian McKellen")')))
+display(len(data.query('cast.str.contains("Vin Diesel") & cast.str.contains("Paul Walker")')))
+display(len(data.query('cast.str.contains("Adam Sandler") & cast.str.contains("Kevin James")')))
+display(len(data.query('cast.str.contains("Daniel Radcliffe") & cast.str.contains("Rupert Grint")')))
+#answer - 5
 
 #36
-# display(len(data.query('director == "Quentin Tarantino" & profit > 0')) / len(data.query('director == "Quentin Tarantino"')))
-# display(len(data.query('director == "Steven Soderbergh" & profit > 0')) / len(data.query('director == "Steven Soderbergh"')))
-# display(len(data.query('director == "Robert Rodriguez" & profit > 0')) / len(data.query('director == "Robert Rodriguez"')))
-# display(len(data.query('director == "Christopher Nolan" & profit > 0')) / len(data.query('director == "Christopher Nolan"')))
-# display(len(data.query('director == "Clint Eastwood" & profit > 0')) / len(data.query('director == "Clint Eastwood"')))
+display(len(data.query('director == "Quentin Tarantino" & profit > 0')) / len(data.query('director == "Quentin Tarantino"')))
+display(len(data.query('director == "Steven Soderbergh" & profit > 0')) / len(data.query('director == "Steven Soderbergh"')))
+display(len(data.query('director == "Robert Rodriguez" & profit > 0')) / len(data.query('director == "Robert Rodriguez"')))
+display(len(data.query('director == "Christopher Nolan" & profit > 0')) / len(data.query('director == "Christopher Nolan"')))
+display(len(data.query('director == "Clint Eastwood" & profit > 0')) / len(data.query('director == "Clint Eastwood"')))
+#answer - 1 (По коду получилось два правильных ответа, я из них не угадал, потом подсказали, что может быть несколько режиссеров у фильма, мораль - надо смотреть данные внимательней)
 
 
 
